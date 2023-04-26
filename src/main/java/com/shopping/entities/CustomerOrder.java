@@ -3,6 +3,7 @@ package com.shopping.entities;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,8 +12,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "customerorder")
 public class CustomerOrder {
 
 	@Id
@@ -22,20 +25,26 @@ public class CustomerOrder {
 		)
 	@SequenceGenerator(name = "seq_customerorder",
 		    allocationSize = 1)
+	@Column(name = "customerorderid")
 	private Long customerOrderId;
 	
 	@ManyToOne
-	private Customer customerId;
+	@JoinColumn(name = "customerid")
+	private Customer customerid;
 	
+	@Column(name = "totalquantity")
 	private int totalQuantity;
 	
+	@Column(name = "totalprice")
 	private Double totalPrice;
 	
+	@Column(name = "orderdate")
 	private Date orderDate;
 	
+	@Column(name = "deliverydate")
 	private Date deliveryDate;
 	
-	@OneToMany(mappedBy = "coId")
+	@OneToMany(mappedBy = "coid")
 	private List<CustomerOrderDetail> customerOrderDetail;
 
 	public Long getCustomerOrderId() {
@@ -47,11 +56,11 @@ public class CustomerOrder {
 	}
 
 	public Customer getCustomerId() {
-		return customerId;
+		return customerid;
 	}
 
 	public void setCustomerId(Customer customerId) {
-		this.customerId = customerId;
+		this.customerid = customerId;
 	}
 
 	public int getTotalQuantity() {
@@ -88,7 +97,7 @@ public class CustomerOrder {
 
 	@Override
 	public String toString() {
-		return "CustomerOrder [customerOrderId=" + customerOrderId + ", customerId=" + customerId + ", totalQuantity="
+		return "CustomerOrder [customerOrderId=" + customerOrderId + ", customerId=" + customerid + ", totalQuantity="
 				+ totalQuantity + ", totalPrice=" + totalPrice + ", orderDate=" + orderDate + ", deliveryDate="
 				+ deliveryDate + "]";
 	}

@@ -1,5 +1,9 @@
 package com.shopping.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,21 +22,26 @@ public class Payment {
 		)
 	@SequenceGenerator(name = "seq_payment",
 		    allocationSize = 1)
+	@Column(name = "paymentid")
 	private Long paymentId;
 	
-//	@GeneratedValue()
+	@GeneratedValue(generator = "payno-generator")
+	@GenericGenerator(name = "payno-generator",
+	parameters = @Parameter(name="prefix", value="PAYNO"),
+	strategy = "com.shopping.generator.CustomPaymentNumberSequenceIdGenerator")
+	@Column(name = "paymentnumber")
 	private String paymentNumber;
 	
 	@ManyToOne
-	@JoinColumn(name = "customerId")
+	@JoinColumn(name = "customerid")
 	private Customer customerId;
 	
 	@ManyToOne
-	@JoinColumn(name = "coId")
+	@JoinColumn(name = "custorderid")
 	private CustomerOrder coId;
 	
 	@ManyToOne
-	@JoinColumn(name = "pmId")
+	@JoinColumn(name = "paymentmodeid")
 	private PaymentMode pmId;
 
 	public Long getPaymentId() {

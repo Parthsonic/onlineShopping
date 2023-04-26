@@ -2,6 +2,7 @@ package com.shopping.entities;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,8 +10,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "customershippingaddress")
 public class CustomerShippingAddress {
 	
 	@Id
@@ -20,10 +23,11 @@ public class CustomerShippingAddress {
 		)
 	@SequenceGenerator(name = "seq_customershippingaddress",
 		    allocationSize = 1)
+	@Column(name = "customershippingaddressid")
 	private Long customerShippingAddressId;
 	
 	@ManyToOne
-	@JoinColumn(name = "customerId")
+	@JoinColumn(name = "customerid")
 	private Customer customerId;
 	
 	private String address;
@@ -34,8 +38,10 @@ public class CustomerShippingAddress {
 	
 	private String country;
 	
+	@Column(name = "createddate")
 	private Date createdDate;
 	
+	@Column(name = "lastmodifieddate")
 	private Date lastModifiedDate;
 
 	public Long getCustomerShippingAddressId() {

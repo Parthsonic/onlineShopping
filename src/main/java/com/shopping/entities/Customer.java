@@ -46,7 +46,7 @@ public class Customer {
 	@Column(name = "lastmodifieddate")
 	private Date lastModifiedDate;
 	
-	@OneToMany(mappedBy = "customerId")
+	@OneToMany(mappedBy = "customerid")
 	private List<CustomerOrder> customerOrder;
 	
 	@OneToMany(mappedBy = "customerId")

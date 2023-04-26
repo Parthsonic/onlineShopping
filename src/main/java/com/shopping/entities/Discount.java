@@ -3,6 +3,7 @@ package com.shopping.entities;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,16 +21,20 @@ public class Discount {
 		)
 	@SequenceGenerator(name = "seq_discount",
 		    allocationSize = 1)
+	@Column(name = "discountid")
 	private Long discountId;
 	
 	private String name;
 	
+	@Column(name = "discountvalue")
 	private float discountValue;
 	
 	private String alias;
 	
+	@Column(name = "createddate")
 	private Date createdDate;
 	
+	@Column(name = "lastmodifieddate")
 	private Date lastmodifiedDate;
 	
 	@OneToMany(mappedBy = "discountId")

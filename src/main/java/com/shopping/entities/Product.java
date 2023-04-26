@@ -3,6 +3,7 @@ package com.shopping.entities;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +23,7 @@ public class Product {
 		)
 	@SequenceGenerator(name = "seq_product",
 		    allocationSize = 1)
+	@Column(name = "productid")
 	private Long productId;
 	
 	private String name;
@@ -29,16 +31,20 @@ public class Product {
 	private String description;
 	
 	@ManyToOne
-	@JoinColumn(name = "categoryId")
+	@JoinColumn(name = "categoryid")
 	private ProductCategory categoryId;
 	
 	private Double price;
 	
+	@Column(name = "createddate")
 	private Date createdDate;
 	
+	@Column(name = "lastmodifieddate")
 	private Date lastmodifiedDate;
 	
-	//private Warehouse warehouseId;
+	@ManyToOne
+	@JoinColumn(name = "warehouseid")
+	private Warehouse warehouseId;
 	
 	private int quantity;
 	
@@ -104,12 +110,13 @@ public class Product {
 		this.lastmodifiedDate = lastmodifiedDate;
 	}
 
-	/*
-	 * public Warehouse getWarehouseId() { return warehouseId; }
-	 * 
-	 * public void setWarehouseId(Warehouse warehouseId) { this.warehouseId =
-	 * warehouseId; }
-	 */
+	public Warehouse getWarehouseId() {
+		return warehouseId;
+	}
+
+	public void setWarehouseId(Warehouse warehouseId) {
+		this.warehouseId = warehouseId;
+	}
 
 	public int getQuantity() {
 		return quantity;
@@ -123,6 +130,6 @@ public class Product {
 	public String toString() {
 		return "Product [productId=" + productId + ", name=" + name + ", description=" + description + ", categoryId="
 				+ categoryId + ", price=" + price + ", createdDate=" + createdDate + ", lastmodifiedDate="
-				+ lastmodifiedDate + /* ", warehouseId=" + warehouseId + */", quantity=" + quantity + "]";
+				+ lastmodifiedDate +  ", warehouseId=" + warehouseId + ", quantity=" + quantity + "]";
 	}
 }

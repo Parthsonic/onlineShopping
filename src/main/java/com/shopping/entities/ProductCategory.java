@@ -3,14 +3,17 @@ package com.shopping.entities;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "productcategory")
 public class ProductCategory {
 
 	@Id
@@ -20,6 +23,7 @@ public class ProductCategory {
 		)
 	@SequenceGenerator(name = "seq_productcategory",
 		    allocationSize = 1)
+	@Column(name = "productcategoryid")
 	private Long productCategoryId;
 	
 	private String name;
@@ -28,8 +32,10 @@ public class ProductCategory {
 	
 	private String description;
 	
+	@Column(name = "createddate")
 	private Date createdDate;
 	
+	@Column(name = "lastmodifieddate")
 	private Date lastmodifiedDate;
 	
 	@OneToMany(mappedBy = "categoryId")

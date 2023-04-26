@@ -1,5 +1,6 @@
 package com.shopping.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,8 +8,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "productdiscountrel")
 public class ProductDiscountRel {
 
 	@Id
@@ -18,14 +21,15 @@ public class ProductDiscountRel {
 		)
 	@SequenceGenerator(name = "seq_productdiscount",
 		    allocationSize = 1)
+	@Column(name = "productdiscountrelid")
 	private Long productDiscountRelId;
 	
 	@ManyToOne
-	@JoinColumn(name = "productId")
+	@JoinColumn(name = "productid")
 	private Product productId;
 	
 	@ManyToOne
-	@JoinColumn(name = "discountId")
+	@JoinColumn(name = "discountid")
 	private Discount discountId;
 
 	public Long getProductDiscountRelId() {
