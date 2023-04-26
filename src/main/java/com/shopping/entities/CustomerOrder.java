@@ -25,7 +25,6 @@ public class CustomerOrder {
 	private Long customerOrderId;
 	
 	@ManyToOne
-	@JoinColumn
 	private Customer customerId;
 	
 	private int totalQuantity;
@@ -36,7 +35,7 @@ public class CustomerOrder {
 	
 	private Date deliveryDate;
 	
-	@OneToMany(mappedBy = "customerOrderId")
+	@OneToMany(mappedBy = "coId")
 	private List<CustomerOrderDetail> customerOrderDetail;
 
 	public Long getCustomerOrderId() {

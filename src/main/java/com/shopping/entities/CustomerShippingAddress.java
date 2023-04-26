@@ -23,7 +23,7 @@ public class CustomerShippingAddress {
 	private Long customerShippingAddressId;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "customerId")
 	private Customer customerId;
 	
 	private String address;

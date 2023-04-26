@@ -21,11 +21,11 @@ public class ProductDiscountRel {
 	private Long productDiscountRelId;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "productId")
 	private Product productId;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "discountId")
 	private Discount discountId;
 
 	public Long getProductDiscountRelId() {

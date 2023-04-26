@@ -1,28 +1,36 @@
 package com.shopping.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class CustomerOrderDetail {
 
 	@Id
+	@GeneratedValue(
+		    strategy = GenerationType.SEQUENCE,
+		    generator = "seq_customerorderdetail"
+		)
+	@SequenceGenerator(name = "seq_customerorderdetail",
+		    allocationSize = 1)
 	private Long customerOrderDetailId;
 	
 	@ManyToOne
-	@JoinColumn
-	private CustomerOrder customerOrderId;
+	private CustomerOrder coId;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "productId")
 	private Product productId;
 	
 	private Double price;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "discountId")
 	private Discount discountId;
 	
 	private Double totalPrice;
@@ -40,11 +48,11 @@ public class CustomerOrderDetail {
 	}
 
 	public CustomerOrder getCustomerOrderId() {
-		return customerOrderId;
+		return coId;
 	}
 
 	public void setCustomerOrderId(CustomerOrder customerOrderId) {
-		this.customerOrderId = customerOrderId;
+		this.coId = customerOrderId;
 	}
 
 	public Product getProductId() {
@@ -98,7 +106,7 @@ public class CustomerOrderDetail {
 	@Override
 	public String toString() {
 		return "CustomerOrderDetail [customerOrderDetailId=" + customerOrderDetailId + ", customerOrderId="
-				+ customerOrderId + ", productId=" + productId + ", price=" + price + ", discountId=" + discountId
+				+ coId + ", productId=" + productId + ", price=" + price + ", discountId=" + discountId
 				+ ", totalPrice=" + totalPrice + ", quantity=" + quantity + ", rate=" + rate + "]";
 	}
 }

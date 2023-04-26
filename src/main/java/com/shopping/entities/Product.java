@@ -29,7 +29,7 @@ public class Product {
 	private String description;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "categoryId")
 	private ProductCategory categoryId;
 	
 	private Double price;
