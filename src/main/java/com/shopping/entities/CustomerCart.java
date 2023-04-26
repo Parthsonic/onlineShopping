@@ -1,12 +1,18 @@
 package com.shopping.entities;
 
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 
+@Entity
 public class CustomerCart {
 	@Id
 	@GeneratedValue(
@@ -16,6 +22,10 @@ public class CustomerCart {
 	@SequenceGenerator(name = "seq_customercart",
 			allocationSize = 1)
 	private Long customerCartId;
+	
+	@OneToMany
+	@JoinColumn(name = "customerCartId")
+	private List<CustomerCartDetail> customerDetailId;
 	
 	private int totalQuantity;
 	private double totalPrice;
