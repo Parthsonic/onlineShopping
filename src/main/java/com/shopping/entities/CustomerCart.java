@@ -3,6 +3,7 @@ package com.shopping.entities;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,8 +12,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "CUSTOMERCART")
 public class CustomerCart {
 	@Id
 	@GeneratedValue(
@@ -21,15 +24,23 @@ public class CustomerCart {
 			)
 	@SequenceGenerator(name = "seq_customercart",
 			allocationSize = 1)
+	@Column(name = "customercartid")
 	private Long customerCartId;
 	
 	@OneToMany
-	@JoinColumn(name = "customerCartId")
+	@JoinColumn(name = "customercartid")
 	private List<CustomerCartDetail> customerDetailId;
 	
+	@Column(name = "totalquantity")
 	private int totalQuantity;
+	
+	@Column(name = "totalprice")
 	private double totalPrice;
+	
+	@Column(name = "orderdate")
 	private Date orderDate;
+	
+	@Column(name = "deliverydate")
 	private Date deliveryDate;
 	public Long getCustomerCartId() {
 		return customerCartId;

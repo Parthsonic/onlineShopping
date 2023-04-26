@@ -1,5 +1,6 @@
 package com.shopping.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Warehouse {
 			)
 	@SequenceGenerator(name = "seq_warehouse",
 			allocationSize = 1)
+	@Column(name = "warehouseid")
 	private Long warehouseId;
 	
 	private String name;

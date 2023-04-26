@@ -3,10 +3,13 @@ package com.shopping.entities;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 
@@ -20,13 +23,22 @@ public class Role {
 	@SequenceGenerator(
 			name = "seq_role",
 			allocationSize = 1)
+	@Column(name = "roleid")
 	private Long roleId;
 	private String name;
 	private String description;
-	private Date createdate;
-	private Date lastmodifieddate;
+	@Column(name = "createdate")
+	private Date createDate;
+	@Column(name = "lastmodifieddate")
+	private Date lastModifiedDate;
 	
 	@OneToMany
+	@JoinTable(name = "roleactionrel",
+		joinColumns = 
+	{ @JoinColumn(name = "roleid", referencedColumnName = "roleId") },
+	inverseJoinColumns = 
+	{ @JoinColumn(name = "actionid", referencedColumnName = "actionId") }
+	)
 	private List<Action> action;
 	
 	public Long getRoleId() {
@@ -47,23 +59,28 @@ public class Role {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getCreatedate() {
-		return createdate;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setCreatedate(Date createdate) {
-		this.createdate = createdate;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
-	public Date getLastmodifieddate() {
-		return lastmodifieddate;
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
 	}
-	public void setLastmodifieddate(Date lastmodifieddate) {
-		this.lastmodifieddate = lastmodifieddate;
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+	}
+	public List<Action> getAction() {
+		return action;
+	}
+	public void setAction(List<Action> action) {
+		this.action = action;
 	}
 	@Override
 	public String toString() {
-		return "Role [roleId=" + roleId + ", name=" + name + ", description=" + description + ", createdate="
-				+ createdate + ", lastmodifieddate=" + lastmodifieddate + "]";
+		return "Role [roleId=" + roleId + ", name=" + name + ", description=" + description + ", createDate="
+				+ createDate + ", lastModifiedDate=" + lastModifiedDate + ", action=" + action + "]";
 	}
-	
 	
 }

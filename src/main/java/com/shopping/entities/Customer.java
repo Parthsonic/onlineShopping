@@ -3,6 +3,7 @@ package com.shopping.entities;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,12 +22,14 @@ public class Customer {
 		)
 	@SequenceGenerator(name = "seq_customer",
 		    allocationSize = 1)
+	@Column(name = "customerid")
 	private Long customerId;
 	
 	private String name;
 	
 	private String email;
 	
+	@Column(name = "mobilenumber")
 	private Long mobileNumber;
 	
 	private String address;
@@ -37,8 +40,10 @@ public class Customer {
 	
 	private String country;
 	
+	@Column(name = "createddate")
 	private Date createdDate;
 	
+	@Column(name = "lastmodifieddate")
 	private Date lastModifiedDate;
 	
 	@OneToMany(mappedBy = "customerId")
@@ -48,7 +53,7 @@ public class Customer {
 	private List<CustomerShippingAddress> customeShippingAddress;
 
 	@OneToMany
-	@JoinColumn(name = "customerId")
+	@JoinColumn(name = "customerid")
 	private List<CustomerCart> customerCart;
 	
 	public Long getCustomerId() {

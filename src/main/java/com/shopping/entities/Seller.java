@@ -3,11 +3,13 @@ package com.shopping.entities;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 
@@ -21,12 +23,14 @@ public class Seller {
 			)
 	@SequenceGenerator(name = "seq_seller",
 			allocationSize = 1)
+	@Column(name = "sellerid")
 	private Long sellerId;
 	
 	private String name;
 	
 	private String email;
 	
+	@Column(name = "mobilenumber")
 	private String mobileNumber;
 	
 	private String address;
@@ -37,13 +41,29 @@ public class Seller {
 	
 	private String country;
 	
+	@Column(name = "createddate")
 	private Date createdDate;
 	
+	@Column(name = "lastmodifieddate")
 	private Date lastModifiedDate;
 
 	@OneToMany
-	//@JoinColumn(name="warehouseId") 
+	@JoinTable(name = "sellerwarehouserel",
+			joinColumns = 
+        { @JoinColumn(name = "sellerid", referencedColumnName = "sellerId") },
+      inverseJoinColumns = 
+        { @JoinColumn(name = "warehouseid", referencedColumnName = "warehouseId") }
+        )
 	private List<Warehouse> warehouse;
+	
+	@OneToMany
+	@JoinTable(name = "sellerproductrel",
+		joinColumns = 
+		{ @JoinColumn(name = "sellerid", referencedColumnName = "sellerId") },
+		inverseJoinColumns = 
+		{ @JoinColumn(name = "productid", referencedColumnName = "productId") }
+		)
+	private List<Product> product;
 	
 	public Long getSellerId() {
 		return sellerId;

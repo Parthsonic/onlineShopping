@@ -2,6 +2,7 @@ package com.shopping.entities;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,11 +20,14 @@ public class Staff {
 			)
 	@SequenceGenerator(name = "seq_staff",
 			allocationSize = 1)
+	@Column(name = "staffid")
 	private Long staffId;
 	private String name;
 	private String password;
-	private Date createdate;
-	private Date lastmodifieddate;
+	@Column(name = "createdate")
+	private Date createDate;
+	@Column(name = "lastmodifieddate")
+	private Date lastModifiedDate;
 	
 	@OneToOne
 	@JoinColumn(name = "roleid", referencedColumnName = "roleid")
@@ -54,22 +58,21 @@ public class Staff {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Date getCreatedate() {
-		return createdate;
+	public Date getCreateDate() {
+		return createDate;
 	}
-	public void setCreatedate(Date createdate) {
-		this.createdate = createdate;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
-	public Date getLastmodifieddate() {
-		return lastmodifieddate;
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
 	}
-	public void setLastmodifieddate(Date lastmodifieddate) {
-		this.lastmodifieddate = lastmodifieddate;
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
 	}
 	@Override
 	public String toString() {
-		return "Staff [staffId=" + staffId + ", name=" + name + ", password=" + password + ", createdate=" + createdate
-				+ ", lastmodifieddate=" + lastmodifieddate + ", role=" + role + "]";
+		return "Staff [staffId=" + staffId + ", name=" + name + ", password=" + password + ", createDate=" + createDate
+				+ ", lastModifiedDate=" + lastModifiedDate + ", role=" + role + "]";
 	}
-	
 }
