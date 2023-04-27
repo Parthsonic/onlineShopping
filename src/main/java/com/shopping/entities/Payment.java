@@ -27,8 +27,8 @@ public class Payment {
 	
 	@GeneratedValue(generator = "payno-generator")
 	@GenericGenerator(name = "payno-generator",
-	parameters = @Parameter(name="prefix", value="PAYNO"),
-	strategy = "com.shopping.generator.CustomPaymentNumberSequenceIdGenerator")
+	parameters = {@Parameter(name="prefix", value="PAYNO"),@Parameter(name="length", value="4")},
+	strategy = "com.shopping.generator.CustomSequenceIdGenerator")
 	@Column(name = "paymentnumber")
 	private String paymentNumber;
 	

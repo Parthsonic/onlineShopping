@@ -11,9 +11,10 @@ import org.hibernate.id.IdentifierGenerator;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.Type;
 
-public class CustomPaymentNumberSequenceIdGenerator implements IdentifierGenerator {
+public class CustomSequenceIdGenerator implements IdentifierGenerator {
 
 	private String prefix;
+	private String length;
 	
 	@Override
 	public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
@@ -29,13 +30,14 @@ public class CustomPaymentNumberSequenceIdGenerator implements IdentifierGenerat
 	          .max()
 	          .orElse(0L);
 
-	        return prefix + "_" + String.format("%04d", (max + 1));
+	        return prefix + "_" + String.format("%0"+length+"d", (max + 1));
 	}
 	
 	@Override
 	public void configure(Type type, Properties params, ServiceRegistry serviceRegistry) throws MappingException {
 		// TODO Auto-generated method stub
 		prefix = params.getProperty("prefix");
+		length = params.getProperty("length");
 	}
 	
 }
