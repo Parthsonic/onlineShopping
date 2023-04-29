@@ -27,6 +27,7 @@ public class Customer {
 	
 	private String name;
 	
+	@Column(unique = true)
 	private String email;
 	
 	@Column(name = "mobilenumber")

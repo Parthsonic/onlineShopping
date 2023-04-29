@@ -22,7 +22,8 @@ public class Staff {
 			allocationSize = 1)
 	@Column(name = "staffid")
 	private Long staffId;
-	private String name;
+	@Column(unique = true)
+	private String username;
 	private String password;
 	@Column(name = "createdate")
 	private Date createDate;
@@ -40,11 +41,11 @@ public class Staff {
 	public void setStaffId(Long staffId) {
 		this.staffId = staffId;
 	}
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public Role getRole() {
 		return role;
@@ -72,7 +73,7 @@ public class Staff {
 	}
 	@Override
 	public String toString() {
-		return "Staff [staffId=" + staffId + ", name=" + name + ", password=" + password + ", createDate=" + createDate
+		return "Staff [staffId=" + staffId + ", name=" + username + ", password=" + password + ", createDate=" + createDate
 				+ ", lastModifiedDate=" + lastModifiedDate + ", role=" + role + "]";
 	}
 }

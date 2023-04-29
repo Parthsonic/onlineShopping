@@ -3,6 +3,7 @@ package com.shopping.services;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.shopping.dto.CustomerRequestVo;
@@ -25,13 +26,16 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
 	private RoleRepository roleRepo;
+	
+	@Autowired
+	private PasswordEncoder encoder;
 	@Override
 	public CustomerResponseVo create(CustomerRequestVo customerRequestVo) {
 		// TODO Auto-generated method stub
 		CustomerResponseVo customerResponseVo = new CustomerResponseVo();
 		Staff staff = new Staff();
-		staff.setName(customerRequestVo.getCustomer().getName());
-		staff.setPassword(customerRequestVo.getPassword());
+		staff.setUsername(customerRequestVo.getCustomer().getEmail());
+		staff.setPassword(encoder.encode(customerRequestVo.getPassword()));
 		staff.setCreateDate(new Date());
 		staff.setLastModifiedDate(new Date());
 		Role role = roleRepo.findByName(customerRequestVo.getRole());
