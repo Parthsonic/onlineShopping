@@ -25,6 +25,7 @@ public class Action {
 	private Date createDate;
 	@Column(name = "lastmodifieddate")
 	private Date lastModifieDdate;
+	private String uri;
 	
 	public Long getActionId() {
 		return actionId;
@@ -50,9 +51,17 @@ public class Action {
 	public void setLastModifieDdate(Date lastModifieDdate) {
 		this.lastModifieDdate = lastModifieDdate;
 	}
+	
+	public String getUri() {
+		return uri;
+	}
+	public void setUri(String uri) {
+		this.uri = uri;
+	}
 	@Override
 	public String toString() {
 		return "Action [actionId=" + actionId + ", name=" + name + ", createDate=" + createDate + ", lastModifieDdate="
-				+ lastModifieDdate + "]";
+				+ lastModifieDdate + ", uri=" + uri + "]";
 	}
+	
 }
