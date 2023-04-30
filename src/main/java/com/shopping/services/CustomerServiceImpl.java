@@ -1,6 +1,7 @@
 package com.shopping.services;
 
 import java.util.Date;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,7 +39,7 @@ public class CustomerServiceImpl implements CustomerService{
 		staff.setPassword(encoder.encode(customerRequestVo.getPassword()));
 		staff.setCreateDate(new Date());
 		staff.setLastModifiedDate(new Date());
-		Role role = roleRepo.findByName(customerRequestVo.getRole());
+		Set<Role> role = roleRepo.findByName(customerRequestVo.getRole());
 		staff.setRole(role);
 		Customer customer =  customerRepo.save(customerRequestVo.getCustomer());
 		staff = staffRepo.save(staff);

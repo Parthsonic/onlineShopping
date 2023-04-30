@@ -1,9 +1,11 @@
 package com.shopping.repositories;
 
+import java.util.Set;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.shopping.entities.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
-	Role findByName(String name);
+	Set<Role> findByName(String name);
 }
